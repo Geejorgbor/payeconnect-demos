@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Sample Bar & Lounge – Payeconnect Demo</title><style>
+body{margin:0;font-family:system-ui,Arial;background:#f3f5f9;color:#1b2540}header{background:#0b1f4b;color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+nav{background:#132e6b;display:flex;flex-wrap:wrap}nav a{color:#dfe6ff;padding:10px 14px;cursor:pointer;text-decoration:none}nav a.on{background:#fff;color:#0b1f4b}
+main{padding:16px;max-width:1000px;margin:auto}.card{background:#fff;border-radius:8px;padding:16px;margin:10px 0;box-shadow:0 1px 3px #0002;overflow-x:auto}
+table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #e3e7ef;text-align:left}th{background:#eef2fa}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}input,button{padding:10px;width:100%;margin:6px 0;box-sizing:border-box}button{background:#0b1f4b;color:#fff;border:0;border-radius:6px}
+footer{text-align:center;padding:16px;background:#0b1f4b}footer a{color:#fff}.note{background:#fff7d6;padding:8px;border-radius:6px}</style></head><body>
+<header><b>Sample Bar & Lounge</b><small>Payeconnect demo · sample data</small></header>
+<div id=login><main><div class=card style="max-width:360px;margin:30px auto"><h2>Demo Login</h2><p class=note>Demo username: <b>bar</b><br>Demo password: <b>bar2026</b> (sample only)</p><input id=u placeholder=Username><input id=p type=password placeholder=Password><button onclick="go()">Log in</button><p id=e style=color:red></p></div></main></div>
+<div id=app hidden><nav id=nav></nav><main id=m></main></div>
+<footer><a href="https://wa.me/231888916127">Book a free demo on WhatsApp +231 888 916 127</a></footer>
+<script>const D={"Sales": [["Time", "Item", "Qty", "Total (LRD)", "Staff"], ["18:10", "Club Beer", "6", "1,800", "Ann (sample)"], ["19:25", "Soft drink", "4", "600", "Joe (sample)"], ["20:40", "Grilled fish", "2", "2,400", "Ann (sample)"]], "Stock": [["Item", "In stock", "Reorder at", "Status"], ["Club Beer", "48", "24", "OK"], ["Soft drink", "12", "20", "Low"], ["Water", "60", "30", "OK"]], "Daily Earnings": [["Date", "Sales (LRD)", "Expenses (LRD)", "Net (LRD)"], ["27 Oct", "38,000", "9,500", "28,500"], ["28 Oct", "42,300", "11,000", "31,300"]], "Staff": [["Name", "Role", "Shift", "Sales today (LRD)"], ["Ann (sample)", "Waitress", "Evening", "4,200"], ["Joe (sample)", "Barman", "Evening", "600"]]};
+function go(){if(u.value=="bar"&&p.value=="bar2026"){login.hidden=1;app.hidden=0;show("Dashboard")}else e.textContent="Use the demo login shown above."}
+function tb(r){return"<table><tr>"+r[0].map(h=>"<th>"+h+"</th>").join("")+"</tr>"+r.slice(1).map(x=>"<tr>"+x.map(c=>"<td>"+c+"</td>").join("")+"</tr>").join("")+"</table>"}
+function show(n){nav.innerHTML=["Dashboard",...Object.keys(D)].map(k=>`<a class="${k==n?'on':''}" onclick="show('${k}')">${k}</a>`).join("");
+m.innerHTML=n=="Dashboard"?"<h2>Dashboard</h2><div class=grid>"+Object.keys(D).map(k=>`<div class=card><b>${k}</b><br>${D[k].length-1} sample records</div>`).join("")+"</div><div class=card><p>All names and figures are clearly fake sample data for demonstration.</p></div>":`<h2>${n}</h2><div class=card>${tb(D[n])}</div>`}</script></body></html>
